@@ -20,16 +20,23 @@
             </form>
 
             <div class="container" style="padding-top:20px;">
+                @if (session('status'))
+                    <div class="alert alert-success" role="alert">
+                        {{ session('status') }}    
+                    </div>
+                @endif
+                
                  <table class="table table-dark table-striped table-hover">
                     <thead>
-                        <tr>
+                        <tr>                        
                             <th class="texto-caixa-alta">Numero</th>
                             <th class="texto-caixa-alta">Ano Empenho</th>
                             <th class="texto-caixa-alta">Nome da Unidade</th>                            
                             <th></th>
                             <th></th>
                             <th></th>
-                        </tr>
+                        </tr>                        					
+						
                     </thead>
                     <tbody>                    
                         

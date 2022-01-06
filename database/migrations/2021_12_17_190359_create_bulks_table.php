@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateBulkTable extends Migration
+class CreateBulksTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class CreateBulkTable extends Migration
      */
     public function up()
     {
-        Schema::create('bulk', function (Blueprint $table) {
+        Schema::create('bulks', function (Blueprint $table) {
             $table->id();
-            $table->integer('numero');
+            //$table->integer('numero');
             $table->integer('entidade');            
             $table->integer('empenho');            
             $table->integer('ano_empenho');            
@@ -79,6 +79,6 @@ class CreateBulkTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('bulk');
+        Schema::dropIfExists('bulks');
     }
 }

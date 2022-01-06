@@ -7,9 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class bulk extends Model
 {
     //
-    protected $table = 'bulk';
+    //protected $table = 'bulk';
     protected $fillable = [
-        'numero',
+        //'numero',
         'entidade',
         'empenho',
         'ano_empenho',
