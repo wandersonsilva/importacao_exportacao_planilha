@@ -20,11 +20,13 @@
             </form>
 
             <div class="container" style="padding-top:20px;">
-                @if (session('status'))
+                
+                @if (isset($msg))
                     <div class="alert alert-success" role="alert">
-                        {{ session('status') }}    
+                        {{ $msg ?? '' }}
                     </div>
                 @endif
+                                    
                 
                  <table class="table table-dark table-striped table-hover">
                     <thead>

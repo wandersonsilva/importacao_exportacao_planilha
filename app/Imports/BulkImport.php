@@ -6,14 +6,15 @@ use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\Importable;
 use Maatwebsite\Excel\Concerns\WithBatchInserts;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use Maatwebsite\Excel\Concerns\SkipsOnFailure;
 use Maatwebsite\Excel\Concerns\SkipsErrors;
 use Maatwebsite\Excel\Validators\Failure;
 use Maatwebsite\Excel\Concerns\WithChunkReading;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 
-class BulkImport implements ToModel, WithHeadingRow, WithBatchInserts, WithChunkReading, ShouldQueue, SkipsOnFailure
+
+class BulkImport implements ToModel, WithHeadingRow, WithBatchInserts, WithChunkReading
 {
+
 	/**
     * @param array $row
     *
@@ -23,9 +24,13 @@ class BulkImport implements ToModel, WithHeadingRow, WithBatchInserts, WithChunk
     use Importable, SkipsErrors;
 
     public function model(array $row)
-    {
+    {      
+        
+        //var_dump($row);die(); 
+       
         return new Bulk([
             //'numero'                    => $row['numero'],
+                        
             'entidade'                  => $row['entidade'],            
             'empenho'                   => $row['empenho'],            
             'ano_empenho'               => $row['ano_empenho'],            
@@ -75,11 +80,20 @@ class BulkImport implements ToModel, WithHeadingRow, WithBatchInserts, WithChunk
             'grupo_sicom'               => $row['grupo_sicom'],            
             'especificacao_sicom'       => $row['especificacao_sicom'],            
             'natureza_despesa_sicom'    => $row['natureza_despesa_sicom'],            
-            'item_despesa_sicom'        => $row['item_despesa_sicom']
-            
-        ]);
-    }
+            'item_despesa_sicom'        => $row['item_despesa_sicom'],
 
+            /*'entidade' => $row['entidade'] ?? $row['empenho'] ?? $row['ano_empenho'] ?? $row['modalidade_empenho'] ?? $row['uo'] ?? $row['ua'] ?? $row['dt_lancamento']
+            ?? $row['transferencia'] ?? $row['instrumento_juridico'] ?? $row['tipo_cota'] ?? $row['periodo'] ?? $row['pessoa'] ?? $row['natureza_despesa'] ?? $row['item_despesa']
+            ?? $row['vl_empenhado'] ?? $row['vl_anulado'] ?? $row['valor_liquidado'] ?? $row['valor_pago'] ?? $row['vl_anul_pagamento'] ?? $row['nome_uo']
+            ?? $row['nome_ua'] ?? $row['funcao'] ?? $row['subfuncao'] ?? $row['programa'] ?? $row['subprograma'] ?? $row['projativ'] ?? $row['fonte'] ?? $row['fonte_detalhe']
+            ?? $row['classificacao'] ?? $row['tipo_periodo'] ?? $row['saldo_emp_liquidar'] ?? $row['saldo_emp_pagar'] ?? $row['codigo_pessoa'] ?? $row['nome_pessoa']
+            ?? $row['tipo_credor'] ?? $row['sf11_credor'] ?? $row['sucaf_fornecedor'] ?? $row['rh_codigo_contrato'] ?? $row['ficha'] ?? $row['processo']
+            ?? $row['sub_acao'] ?? $row['nome_sub_acao'] ?? $row['tipo_documento_credor'] ?? $row['numero_documento_credor'] ?? $row['grupo_pbh'] ?? $row['especificacao_pbh']
+            ?? $row['grupo_sicom'] ?? $row['especificacao_sicom'] ?? $row['natureza_despesa_sicom'] ?? $row['item_despesa_sicom'] ?? null
+            */
+        ]);       
+
+    }
     
     public function batchSize(): int
     {
@@ -89,12 +103,6 @@ class BulkImport implements ToModel, WithHeadingRow, WithBatchInserts, WithChunk
     public function chunkSize(): int
     {
         return 1000;
-    }
-
-    public function onFailure(Failure ...$failures)
-    {
-        // Handle the failures how you'd like.
-    }
-
+    }   
 }
 
